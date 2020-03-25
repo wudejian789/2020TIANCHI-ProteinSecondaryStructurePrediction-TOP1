@@ -8,7 +8,7 @@
 
 蛋白质可以看成是一条氨基酸序列，在空间中是一种相互交错螺旋的结构，像一条互相缠绕的绳子：
 
-![img](https://github.com/wudejian789/2020TIANCHI-ProteinSecondaryStructurePrediction-TOP1/images/fig1.png)
+![img](https://github.com/wudejian789/wudejian789-2020TIANCHI-ProteinSecondaryStructurePrediction-TOP1/tree/master/images/fig1.png)
 
 这种三维结构叫做蛋白质的三级结构，而如果不考虑结构的三维性，或者说把这整条序列拉直，用一个一维的序列表示，这便是得到了蛋白质的一级结构：
 
@@ -55,7 +55,7 @@
 ### 3.2 Word2vec+深层NN
 NN的结构设计主要参考论文《Protein Secondary Structure Prediction Using Cascaded Convolutional and Recurrent Neural Networks》[1]，这是一篇使用深度学习进行蛋白质二级结构预测的经典论文，文中使用了CNN+BiGRU的结构进行蛋白质二级结构预测，模型结构如下：
 
-![img](https://github.com/wudejian789/2020TIANCHI-ProteinSecondaryStructurePrediction-TOP1/images/fig2.png)
+![img](https://github.com/wudejian789/wudejian789-2020TIANCHI-ProteinSecondaryStructurePrediction-TOP1/tree/master/images/fig2.png)
 
 该模型先通过CNN捕获局部信息，再通过RNN融入全局信息，是NLP长文本任务的常见baseline模型。这里基本照搬了模型结构，但将编码部分改为了word2vec预训练的结构，词向量大小为128，其它结构和参数与原文一致，文章可从github项目目录进行下载。
 
