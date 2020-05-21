@@ -118,10 +118,11 @@ class DataClass:
         '''
     def vectorize(self, method="char2vec", feaSize=128, window=13, sg=1, 
                         workers=8, loadCache=True):
+        if method=='feaEmbedding': loadCache = False
         vecPath = f'cache/{method}_k{self.k}_d{feaSize}.pkl'
         if os.path.exists(vecPath) and loadCache:
             with open(vecPath, 'rb') as f:
-                self.vector['embedding' if method!='feaEmbedding' else 'feaEmbedding'] = pickle.load(f)
+                self.vector['embedding'] = pickle.load(f)
             print(f'Loaded cache from cache/{vecPath}.')
             return
         if method == 'char2vec':
@@ -134,6 +135,8 @@ class DataClass:
                 else:
                     print(self.id2seqItem[i],'not in training docs...')
             self.vector['embedding'] = char2vec
+            with open(vecPath, 'wb') as f:
+                pickle.dump(self.vector['embedding'], f, protocol=4)
         elif method == 'feaEmbedding':
             oh = np.eye(self.seqItemNum)
             feaAppend = []
@@ -146,8 +149,6 @@ class DataClass:
             emb = np.hstack([oh, np.array(feaAppend)]).astype('float32')
             mean,std = emb.mean(axis=0),emb.std(axis=0)
             self.vector['feaEmbedding'] = (emb-mean)/(std+1e-10)
-        with open(vecPath, 'wb') as f:
-            pickle.dump(self.vector['embedding'], f, protocol=4)
 
     def vector_merge(self, vecList, mergeVecName='mergeVec'):
         self.vector[mergeVec] = np.hstack([self.vector[i] for i in vecList])

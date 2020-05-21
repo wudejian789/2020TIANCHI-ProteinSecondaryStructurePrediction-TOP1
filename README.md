@@ -110,7 +110,7 @@ dataClass.vectorize(method='char2vec', feaSize=25, sg=1)
 dataClass.vectorize(method='feaEmbedding')
 # 初始化模型对象
 model = FinalModel(classNum=dataClass.classNum, embedding=dataClass.vector['embedding'], feaEmbedding=dataClass.vector['feaEmbedding'], 
-                   feaSize=50, useFocalLoss=True, device=torch.device('cuda'))
+                   useFocalLoss=True, device=torch.device('cuda'))
 # 开始训练
 model.cv_train( dataClass, trainSize=64, batchSize=64, epoch=1000, stopRounds=100, earlyStop=30, saveRounds=1,
                 savePath='model/FinalModel', lr=3e-4, augmentation=0.1, kFold=3)
