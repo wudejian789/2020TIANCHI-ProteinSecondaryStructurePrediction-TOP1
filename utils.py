@@ -253,7 +253,7 @@ class DataClass_BP:
             vecPath = f'cache/{method}_k{self.k}_d{feaSize}.pkl'
         if os.path.exists(vecPath) and loadCache:
             with open(vecPath, 'rb') as f:
-                self.vector['embedding'] = pickle.load(f)
+                self.vector['embedding' if method!='feaEmbedding' else 'feaEmbedding'] = pickle.load(f)
             print(f'Loaded cache from cache/{vecPath}.')
             return
         if method == 'feaEmbedding':
